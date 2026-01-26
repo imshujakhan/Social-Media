@@ -21,6 +21,7 @@ const postListReducer = (currentPostList, action) => {
     );
   } else if (action.type === "ADD_POSTS") {
     newPostList = action.payload.posts;
+    console.log(newPostList);
   } else if (action.type === "ADD_POST") {
     newPostList = [action.payload, ...currentPostList];
   }
@@ -29,6 +30,7 @@ const postListReducer = (currentPostList, action) => {
 
 const PostListProvider = ({ children }) => {
   const [postList, dispatchPostList] = useReducer(postListReducer, []);
+
   const [fetching, setFetching] = useState(false);
 
   const addPost = useCallback((post) => {
@@ -39,9 +41,11 @@ const PostListProvider = ({ children }) => {
   }, []);
 
   const addPosts = useCallback((posts) => {
+    console.log("dispatch");
+
     dispatchPostList({
       type: "ADD_POSTS",
-      payload: posts,
+      payload: { posts },
     });
   }, []);
 
@@ -66,15 +70,13 @@ const PostListProvider = ({ children }) => {
       .then((res) => res.json())
       .then((data) => {
         addPosts(data.posts);
-
         setFetching(false);
-      })
-      .then("hey", console.log);
+      });
 
     return () => {
       controller.abort();
     };
-  }, []);
+  }, [addPosts]);
 
   return (
     <PostList.Provider value={{ postList, fetching, addPost, deletePost }}>

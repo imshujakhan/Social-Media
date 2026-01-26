@@ -6,7 +6,7 @@ import Loading from "./Loading";
 
 const PostList = () => {
   const { postList, fetching } = useContext(PostListData);
-
+console.log(postList)
   return (
     <>
       {fetching && <Loading />}
