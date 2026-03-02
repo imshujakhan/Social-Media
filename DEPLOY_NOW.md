@@ -50,7 +50,7 @@ Follow prompts → Done!
 
 ## 📝 Files Ready for Deployment
 
-✅ server.js - Backend server
+✅ server.cjs - Backend server (CommonJS)
 ✅ package.json - Updated with dependencies
 ✅ db.json - Database
 ✅ All source code

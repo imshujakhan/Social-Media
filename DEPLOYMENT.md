@@ -12,13 +12,15 @@
 ### Part A: Deploy Backend (JSON Server) on Render
 
 #### 1. Create Backend Package
-Create `server.js` in project root:
+Create `server.cjs` in project root:
 ```javascript
 const jsonServer = require('json-server');
+const cors = require('cors');
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 
+server.use(cors({ origin: '*', credentials: true }));
 server.use(middlewares);
 server.use(router);
 
@@ -32,7 +34,7 @@ server.listen(PORT, () => {
 Add to scripts:
 ```json
 "scripts": {
-  "start": "node server.js",
+  "start": "node server.cjs",
   "dev": "vite",
   "api": "json-server --watch db.json --port 3001",
   "dev:all": "concurrently \"npm run api\" \"npm run dev\"",
@@ -186,9 +188,9 @@ npm install cors
 - [ ] Commit all changes
 
 ### Backend (Render):
-- [ ] Create `server.js`
+- [ ] Create `server.cjs`
 - [ ] Update `package.json` scripts
-- [ ] Add `json-server` to dependencies
+- [ ] Add `json-server` and `cors` to dependencies
 - [ ] Push to GitHub
 - [ ] Deploy on Render
 - [ ] Copy API URL
