@@ -1,16 +1,56 @@
-# React + Vite
+# Social Media App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple social media platform where users can create, view, and delete posts with real-time data fetching.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Create new posts with title and content
+- View all posts in a feed
+- Delete posts
+- Fetch posts from external API
+- Loading states and welcome screen
+- Responsive design with Bootstrap
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19 + Vite
+- Context API (state management)
+- Bootstrap 5 (styling)
+- React Icons
+- JSONPlaceholder API (data source)
 
-## Expanding the ESLint configuration
+## Quick Start
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+```
+
+Visit `http://localhost:5173`
+
+## Project Structure
+
+```
+src/
+├── component/
+│   ├── CreatePost.jsx      # Post creation form
+│   ├── PostList.jsx        # Posts feed
+│   ├── PostCard.jsx        # Individual post display
+│   ├── Header.jsx          # Navigation bar
+│   ├── SideBar.jsx         # Side navigation
+│   ├── Loading.jsx         # Loading spinner
+│   └── Welcome.jsx         # Empty state
+└── store/
+    └── Post-List-Store.jsx # Context API store
+```
+
+## State Management
+
+Uses React Context API for global state:
+- Post list management
+- Add/delete operations
+- Loading states
+
+## API Integration
+
+Fetches initial posts from: `https://dummyjson.com/posts`
