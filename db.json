@@ -1,0 +1,119 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "john@test.com",
+      "password": "123456",
+      "avatar": "https://i.pravatar.cc/150?img=1",
+      "createdAt": "2024-01-15T10:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "email": "jane@test.com",
+      "password": "123456",
+      "avatar": "https://i.pravatar.cc/150?img=2",
+      "createdAt": "2024-01-15T10:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "name": "Mike Johnson",
+      "email": "mike@test.com",
+      "password": "123456",
+      "avatar": "https://i.pravatar.cc/150?img=3",
+      "createdAt": "2024-01-15T10:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "name": "Sarah Wilson",
+      "email": "sarah@test.com",
+      "password": "123456",
+      "avatar": "https://i.pravatar.cc/150?img=4",
+      "createdAt": "2024-01-15T10:00:00.000Z"
+    },
+    {
+      "id": "fbac",
+      "name": "shuja ",
+      "email": "shuja@gmail.com",
+      "password": "123456",
+      "avatar": "https://i.pravatar.cc/150?u=shuja@gmail.com"
+    }
+  ],
+  "posts": [
+    {
+      "id": "2",
+      "userId": "2",
+      "userName": "Jane Smith",
+      "userAvatar": "https://i.pravatar.cc/150?img=2",
+      "title": "CSS Tips and Tricks",
+      "content": "Here are some useful CSS techniques I learned recently. Flexbox and Grid make layouts so much easier!",
+      "tags": [
+        "css",
+        "webdev",
+        "frontend"
+      ],
+      "likes": [
+        "1",
+        "4"
+      ],
+      "createdAt": "2024-01-15T11:00:00.000Z",
+      "updatedAt": "2024-01-15T11:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "userId": "3",
+      "userName": "Mike Johnson",
+      "userAvatar": "https://i.pravatar.cc/150?img=3",
+      "title": "JavaScript ES6 Features",
+      "content": "Arrow functions, destructuring, and spread operators have changed the way I write JavaScript. Modern JS is so powerful!",
+      "tags": [
+        "javascript",
+        "es6",
+        "programming"
+      ],
+      "likes": [
+        "1",
+        "2",
+        "4"
+      ],
+      "createdAt": "2024-01-15T12:00:00.000Z",
+      "updatedAt": "2024-01-15T12:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "userId": "4",
+      "userName": "Sarah Wilson",
+      "userAvatar": "https://i.pravatar.cc/150?img=4",
+      "title": "My First Post!",
+      "content": "Hello everyone! Excited to be part of this community. Looking forward to sharing and learning together.",
+      "tags": [
+        "introduction",
+        "hello"
+      ],
+      "likes": [
+        "1"
+      ],
+      "createdAt": "2024-01-15T13:00:00.000Z",
+      "updatedAt": "2024-01-15T13:00:00.000Z"
+    },
+    {
+      "id": "6",
+      "userId": "2",
+      "userName": "Jane Smith",
+      "userAvatar": "https://i.pravatar.cc/150?img=2",
+      "title": "Responsive Design Best Practices",
+      "content": "Mobile-first approach is the way to go! Always start with mobile design and scale up for larger screens.",
+      "tags": [
+        "responsive",
+        "mobile",
+        "design"
+      ],
+      "likes": [
+        "3"
+      ],
+      "createdAt": "2024-01-15T15:00:00.000Z",
+      "updatedAt": "2024-01-15T15:00:00.000Z"
+    }
+  ]
+}

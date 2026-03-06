@@ -1,52 +1,42 @@
-const SideBar = ({ selectedTab, setSelectedTab }) => {
+import { Link, useLocation } from "react-router-dom";
+
+const SideBar = () => {
+  const location = useLocation();
+  
   return (
-    <div
-      className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark sidebar"
-      style={{ width: "180px" }}
-    >
+    <div className="d-flex flex-column flex-shrink-0 p-3 bg-white sidebar" style={{ width: "200px", borderRight: "1px solid #e4e6eb" }}>
+      <Link to="/" className="d-flex align-items-center mb-3 mb-md-0 text-decoration-none" style={{ color: "#1877f2" }}>
+        <span className="fs-5 fw-bold">Menu</span>
+      </Link>
+      <hr style={{ borderColor: "#e4e6eb" }} />
       <ul className="nav nav-pills flex-column mb-auto">
-        {" "}
         <li className="nav-item">
-          {" "}
-          <a
-            href="#"
-            onClick={() => setSelectedTab("Home")}
-            className={`nav-link text-white ${selectedTab === "Home" ? "active" : ""}`}
-            aria-current="page"
+          <Link 
+            to="/" 
+            className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+            style={{
+              color: location.pathname === '/' ? '#1877f2' : '#050505',
+              background: location.pathname === '/' ? '#e7f3ff' : 'transparent',
+              fontWeight: 500
+            }}
           >
-            {" "}
-            <svg
-              className="bi pe-none me-2"
-              width="16"
-              height="16"
-              aria-hidden="true"
-            >
-              <use xlinkHref="#home"></use>
-            </svg>
-            Home
-          </a>{" "}
-        </li>{" "}
+            🏠 Home
+          </Link>
+        </li>
         <li>
-          {" "}
-          <a
-            href="#"
-            onClick={() => setSelectedTab("Create")}
-            className={`nav-link text-white ${selectedTab === "Create" ? "active" : ""}`}
-            aria-current="page"
+          <Link 
+            to="/create-post" 
+            className={`nav-link ${location.pathname === '/create-post' ? 'active' : ''}`}
+            style={{
+              color: location.pathname === '/create-post' ? '#1877f2' : '#050505',
+              background: location.pathname === '/create-post' ? '#e7f3ff' : 'transparent',
+              fontWeight: 500
+            }}
           >
-            {" "}
-            <svg
-              className="bi pe-none me-2"
-              width="16"
-              height="16"
-              aria-hidden="true"
-            >
-              <use xlinkHref="#speedometer2"></use>
-            </svg>
-            Create Post
-          </a>{" "}
-        </li>{" "}
-      </ul>{" "}
+            ✏️ Create Post
+          </Link>
+        </li>
+      </ul>
     </div>
   );
 };

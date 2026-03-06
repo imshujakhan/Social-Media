@@ -1,12 +1,13 @@
 # Social Media App
 
-A simple social media platform where users can create, view, and delete posts with real-time data fetching.
+A full-stack social media platform with authentication, CRUD operations, and real-time data fetching.
 
 ## Features
 
-- Create new posts with title and content
+- User authentication (Login/Signup)
+- Create, read, update, delete posts
+- Like/Unlike posts
 - View all posts in a feed
-- Delete posts
 - Fetch posts from external API
 - Loading states and welcome screen
 - Responsive design with Bootstrap
@@ -14,15 +15,24 @@ A simple social media platform where users can create, view, and delete posts wi
 ## Tech Stack
 
 - React 19 + Vite
+- React Router (navigation)
 - Context API (state management)
 - Bootstrap 5 (styling)
 - React Icons
-- JSONPlaceholder API (data source)
+- JSON Server (backend)
+- DummyJSON API (data source)
 
 ## Quick Start
 
 ```bash
+# Install dependencies
 npm install
+npm install -g json-server
+
+# Run backend
+npm run api
+
+# Run frontend (in separate terminal)
 npm run dev
 ```
 
@@ -48,9 +58,29 @@ src/
 
 Uses React Context API for global state:
 - Post list management
-- Add/delete operations
+- Add/delete/update operations
 - Loading states
+- Authentication state
 
 ## API Integration
 
-Fetches initial posts from: `https://dummyjson.com/posts`
+- External API: `https://dummyjson.com/posts`
+- Local API: JSON Server for user data
+
+## Login Credentials
+
+```
+Email: john@test.com
+Password: 123456
+```
+
+## API Endpoints
+
+```
+GET    /users
+POST   /users
+GET    /posts
+POST   /posts
+PUT    /posts/:id
+DELETE /posts/:id
+```

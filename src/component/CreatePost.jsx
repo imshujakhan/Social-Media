@@ -1,112 +1,97 @@
-import { useContext, useRef } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { PostList } from "../store/Post-List-Store";
+import { getAuth } from "../utils/auth";
+import { API_BASE_URL, ENDPOINTS } from "../config/api";
 
 const CreatePost = () => {
+  const [formData, setFormData] = useState({ title: "", content: "", tags: "" });
+  const [loading, setLoading] = useState(false);
   const { addPost } = useContext(PostList);
+  const navigate = useNavigate();
+  const user = getAuth();
 
-  const userIdElement = useRef();
-  const postTitleElement = useRef();
-  const postBodyElement = useRef();
-  const reactionsElement = useRef();
-  const tagsElement = useRef();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const userId = userIdElement.current.value;
-    const postTitle = postTitleElement.current.value;
-    const postBody = postBodyElement.current.value;
-    const reactions = reactionsElement.current.value;
-    const tags = tagsElement.current.value.split(" ");
-
-    // userIdElement.current.value = "";
-    // postTitleElement.current.value = "";
-    // postBodyElement.current.value = "";
-    // reactionsElement.current.value = "";
-    // tagsElement.current.value = "";
-
-    fetch("https://dummyjson.com/posts/add", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        title: postTitle,
-        body: postBody,
-        reactions: reactions,
-        userId: userId,
-        tags: tags,
-      }),
-    })
-      .then((res) => res.json())
-      .then((post) => {
-        addPost(post);
-      });
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const newPost = {
+        userId: user.id,
+        userName: user.name,
+        userAvatar: user.avatar || "",
+        title: formData.title,
+        content: formData.content,
+        tags: formData.tags.split(" ").filter((tag) => tag.trim()),
+        likes: [],
+      };
+
+      const response = await fetch(`${API_BASE_URL}${ENDPOINTS.POSTS}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newPost),
+      });
+
+      const createdPost = await response.json();
+      addPost(createdPost);
+      navigate("/");
+    } catch (err) {
+      alert("Failed to create post");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div>
-      <form className="create-post" onSubmit={handleSubmit}>
+    <div className="posts-container">
+      <form onSubmit={handleSubmit} className="create-post">
+        <h2 className="mb-4">Create New Post</h2>
+
         <div className="mb-3">
-          <label htmlFor="userId" className="form-label">
-            User Id:
-          </label>
+          <label className="form-label">Post Title</label>
           <input
-            ref={userIdElement}
-            type="number"
-            className="form-control"
-            id="userId"
-            placeholder="userId"
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="title" className="form-label">
-            Post Title:
-          </label>
-          <input
-            ref={postTitleElement}
             type="text"
             className="form-control"
-            id="title"
-            placeholder="How are you feeling today..."
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            placeholder="What's on your mind?"
+            required
           />
         </div>
 
         <div className="mb-3">
-          <label htmlFor="body" className="form-label">
-            Post Content:
-          </label>
+          <label className="form-label">Post Content</label>
           <textarea
-            ref={postBodyElement}
-            rows="2"
-            type="text"
             className="form-control"
-            id="body"
-            placeholder="Tell us more about it"
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="reactions" className="form-label">
-            Number of reactions:
-          </label>
-          <input
-            ref={reactionsElement}
-            type="number"
-            className="form-control"
-            id="reactions"
-            placeholder="How many people reacted to this "
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="tags" className="form-label">
-            Enter your hashtags here:
-          </label>
-          <input
-            ref={tagsElement}
-            type="text"
-            className="form-control"
-            id="tags"
-            placeholder="Please enter tags using space"
+            name="content"
+            rows="4"
+            value={formData.content}
+            onChange={handleChange}
+            placeholder="Share your thoughts..."
+            required
           />
         </div>
 
-        <button type="submit" className="btn btn-primary">
-          Post
+        <div className="mb-3">
+          <label className="form-label">Tags (space-separated)</label>
+          <input
+            type="text"
+            className="form-control"
+            name="tags"
+            value={formData.tags}
+            onChange={handleChange}
+            placeholder="e.g., react javascript webdev"
+          />
+          <small className="text-muted">Separate tags with spaces</small>
+        </div>
+
+        <button type="submit" className="btn btn-primary btn-lg w-100" disabled={loading}>
+          {loading ? "Publishing..." : "📤 Publish Post"}
         </button>
       </form>
     </div>
